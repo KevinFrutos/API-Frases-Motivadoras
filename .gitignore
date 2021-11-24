@@ -1,0 +1,3 @@
+#Ignora todo lo privado o lo que no sea necesario enviar al repositorio
+node_modules
+.env
