@@ -1,8 +1,11 @@
 const { Schema } = require("mongoose");
+const db = require('../database');
 
-const registrarse = new Schema({
-    nombre: {type: Text, minlength: 3, maxlength: 50},
-    email: {type: Text, minlength: 5, maxlength:50}
-})
+const schema = new Schema({
+    nombre: { type: String, minlength: 3, maxlength: 50 },
+    email: { type: String, minlength: 5, maxlength: 50 }
+});
 
-module.exports = registrarse
+const Registrarse = db.model('Registrarse', schema)
+
+module.exports = Registrarse
