@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 app.use('/api/user', autentificacion)
 
 app.get('/prueba', (req, res) => {
-  db.collection('registrarse').find().toArray()
+  db.collection('registros').find().toArray()
     .then(results => {
       res.send(results)
     })
