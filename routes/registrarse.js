@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const registrarse = require('../models/registrarse')
+const registrarse = require('../models/schema_registrarse')
 
 router.post('/registrarse', async (req, res) => {
     console.log(req.body.nombre)

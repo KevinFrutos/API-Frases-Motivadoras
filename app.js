@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyparser = require('body-parser');
 require('dotenv').config()
-const db = require('./database');
-const autentificacion = require('./routes/usuarios')
+const registrarse = require('./routes/registrarse')
+const consultaUsuarios = require('./routes/consultaUsuarios')
 
 const app = express();
 
@@ -17,15 +17,10 @@ app.get('/', (req, res) => {
   res.send("CONECTADO")
 })
 
-app.use('/api/user', autentificacion)
+app.use('/perfil', registrarse)
 
-app.get('/prueba', (req, res) => {
-  db.collection('registros').find().toArray()
-    .then(results => {
-      res.send(results)
-    })
-    .catch(error => console.error(error))
-})
+app.use('/consultas', consultaUsuarios)
+
 
 // SI EL USUARIO INTENTA ENTRAR A ALGUNA RUTA QUE NO ESTE CONFIGURADA LE SALTARA LA PAGINA DE ERROR 404
 app.use((req, res, next) => {

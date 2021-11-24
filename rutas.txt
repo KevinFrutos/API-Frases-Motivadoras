@@ -1,0 +1,10 @@
+# CONECTADO
+GET /
+
+# REGISTRARSE
+POST /perfil/registrarse
+
+
+# CONSULTAS
+
+GET /consultas/usuarios
