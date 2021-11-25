@@ -1,10 +1,14 @@
 const express = require('express');
 const bodyparser = require('body-parser');
 require('dotenv').config()
+const cors = require('cors')
 const registrarse = require('./routes/registrarse')
 const consultaUsuarios = require('./routes/consultaUsuarios')
 
 const app = express();
+
+// CUALQUIER RUTA PUEDE ACCEDER A LA API
+app.use(cors())
 
 // CAPTURAR DATOS DEL BODY
 app.use(bodyparser.urlencoded({ extended: false }));
