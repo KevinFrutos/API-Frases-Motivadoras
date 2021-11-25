@@ -7,7 +7,7 @@ router.post('/registrarse',
     body('nombre_usuario').isLength({ min: 6 }),
     body('email').isEmail(),
     body('passwd').isLength({ min: 6 }),
-    async (req, res) => {
+    (req, res) => {
         // USO EL METODO VALIDATIONRESULT PARA CAPTURAR LOS POSIBLES ERRORES EN LA VALIDACION DE CAMPOS
         const errors = validationResult(req);
         // EN CASO DE CAPTURAR ALGUN ERROR, SE DEVUELVE UN STATUS 400 Y UN JSON CON EL ERROR Y EL CAMPO AFECTADO.
