@@ -3,6 +3,7 @@ GET /
 
 # REGISTRARSE
 POST /perfil/registrarse
+SCHEMA DE LOS CAMPOS A USAR: \models\schema_registrarse.js
 
 # CONSULTAS
 
