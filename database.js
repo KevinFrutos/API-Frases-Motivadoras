@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 // AWS-SDK ES PARA QUE LA APP FUNCIONE EN HEROKU
-/*
 const aws = require('aws-sdk');
 
 let s3 = new aws.S3({
@@ -8,7 +7,6 @@ let s3 = new aws.S3({
   PASSWORD: process.env.PASSWORD,
   DBNAME: process.env.DBNAME
 });
-*/
 
 const url = "mongodb+srv://" + process.env.USER + ":" + process.env.PASSWORD + "@api-general.xdns4.mongodb.net/" + process.env.DBNAME + "?retryWrites=true&w=majority";
 

@@ -11,10 +11,3 @@ router.get('/usuarios', async (req, res) => {
 })
 
 module.exports = router
-/*
-db.collection('registros').find().toArray()
-    .then(results => {
-      res.send(results)
-    })
-    .catch(error => console.error(error))
-     */
