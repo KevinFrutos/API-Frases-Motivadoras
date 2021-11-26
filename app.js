@@ -5,6 +5,7 @@ const cors = require('cors')
 const registrarse = require('./routes/registrarse')
 const login = require('./routes/login')
 const consultaUsuarios = require('./routes/consultaUsuarios')
+const validarToken = require('./routes/validarToken')
 
 const app = express();
 
@@ -29,7 +30,7 @@ app.use('/perfil', registrarse)
 
 app.use('/perfil', login)
 
-app.use('/consultas', consultaUsuarios)
+app.use('/consultas', validarToken, consultaUsuarios)
 
 
 // SI EL USUARIO INTENTA ENTRAR A ALGUNA RUTA QUE NO ESTE CONFIGURADA LE SALTARA LA PAGINA DE ERROR 404

@@ -43,6 +43,7 @@ router.post('/registrarse',
                     } else {
                         res.header('auth-token', token).json({
                             error: null,
+                            description: "Este es tu token recuerda no compartirlo con nadie",
                             data: token
                         })
                     }
