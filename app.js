@@ -18,8 +18,12 @@ app.use(bodyparser.json());
 // FORMATEAR LOS JSON
 app.set('json spaces', 2);
 
-// PARA PODER USAR UNA PAGINA ESTATICA EN ALGUNA RUTA HAY QUE HACERLO DE LA SIGUIENTE FORMA
-app.get('/', express.static(__dirname + '/public'))
+app.get('/', (req, res) => {
+  res.json({
+    "error": null, 
+    "descripcion": "Conectado a API-General"
+  })
+})
 
 app.use('/perfil', registrarse)
 
