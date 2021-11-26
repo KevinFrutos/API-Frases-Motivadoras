@@ -14,5 +14,4 @@ JSON QUE NECESITA LA RUTA PARA VALIDAR EL LOGIN
 }
 
 # CONSULTAS
-
-GET /consultas/usuarios
+GET /consultas/usuario?nombre_usuario=TuNombreDeUsuario
