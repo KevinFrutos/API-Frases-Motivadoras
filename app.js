@@ -3,6 +3,7 @@ const bodyparser = require('body-parser');
 require('dotenv').config()
 const cors = require('cors')
 const registrarse = require('./routes/registrarse')
+const login = require('./routes/login')
 const consultaUsuarios = require('./routes/consultaUsuarios')
 
 const app = express();
@@ -22,6 +23,8 @@ app.get('/', (req, res) => {
 })
 
 app.use('/perfil', registrarse)
+
+app.use('/perfil', login)
 
 app.use('/consultas', consultaUsuarios)
 
