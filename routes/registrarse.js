@@ -3,7 +3,6 @@ const Registrarse = require('../models/schema_registrarse')
 const { body, validationResult } = require('express-validator'); // USO ESTA LIBRERIA PARA VALIDAR LOS DATOS ANTES DE GUARDARLOS.
 const bcrypt = require("bcryptjs"); // USO ESTA LIBRERIA PARA ENCRIPTAR LA CONTRASEÑA ANTES DE ENVIARLA A LA BASE DE DATOS
 const jwt = require('jsonwebtoken'); // USO ESTA LIBRERIA PARA CREAR LA API-KEY
-const aws = require('aws-sdk');
 
 router.post('/registrarse',
     // UTILIZO EXPRESS-VALIDATOR PARA VALIDAR LOS CAMPOS SIGUIENTES
@@ -28,14 +27,11 @@ router.post('/registrarse',
                     email: req.body.email,
                     passwd: hash
                 })
-                let s3 = new aws.S3({
-                    TOKEN_SECRET: process.env.TOKEN_SECRET
-                  });
                 // SE CREA EL TOKEN UTILIZANDO EL NOMBRE DE USUARIO Y LA CONTRASEÑA
                 const token = jwt.sign({
                     nombre_usuario: req.body.nombre_usuario,
                     passwd: req.body.passwd
-                }, s3.TOKEN_SECRET)
+                }, process.env.TOKEN_SECRET)
                 // SE ENVIA EL OBJETO JSON A LA BASE DE DATOS Y SE CREA LA ENTRADA CON LOS DATOS ENVIADOS.
                 registrarse.save(err => {
                     if (err) {
