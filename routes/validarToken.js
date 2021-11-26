@@ -7,10 +7,11 @@ const validarToken = (req, res, next) => {
         return res.status(401).json({ error: 'Acceso denegado' })
     }
     try {
-        jwt.verify(token, process.env.TOKEN_SECRET) // COMPRUEBA SI EL TOKEN ES CORRECTO
+        const token_valido = jwt.verify(token, process.env.TOKEN_SECRET) // COMPRUEBA SI EL TOKEN ES CORRECTO
+        req.token = token_valido
         next() // EN CASO DE QUE EL TOKEN SEA CORRECTO, CONTINUA A LA RUTA PROTEGIDA
     } catch (error) {
-        res.status(400).json({ error: 'token no es válido' })
+        res.status(400).json({ error: 'El token no es válido' })
     }
 }
 
