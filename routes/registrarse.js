@@ -27,7 +27,7 @@ router.post('/registrarse',
                     email: req.body.email,
                     passwd: hash
                 })
-                // SE CREA EL TOKEN
+                // SE CREA EL TOKEN UTILIZANDO EL NOMBRE DE USUARIO Y LA CONTRASEÑA
                 const token = jwt.sign({
                     nombre_usuario: req.body.nombre_usuario,
                     passwd: req.body.passwd
@@ -41,6 +41,7 @@ router.post('/registrarse',
                             data: 'Algo fue mal'
                         })
                     } else {
+                        // EN CASO QUE EL USUARIO SEA CORRECTO Y SE GUARDE EN LA BASE DE DATOS SE ENVIA EL TOKEN
                         res.header('auth-token', token).json({
                             error: null,
                             description: "Este es tu token recuerda no compartirlo con nadie",
