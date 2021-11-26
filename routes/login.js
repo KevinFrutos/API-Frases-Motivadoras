@@ -11,7 +11,7 @@ router.post('/login', async (req,res) => {
         // Y LA COMPARO CON LA CONTRASEÑA QUE EL USUARIO HA INTRODUCIDO
         bcrypt.compare(req.body.passwd, cursor[0].passwd, function(err, resultado) {
             //console.log(resultado) // TRUE SI EL PASSWORD ES CORRECTO
-            if(err){
+            if(!resultado){
                 res.json({
                     error: err,
                     data: 'Algo fue mal'
