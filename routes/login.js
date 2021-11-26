@@ -1,16 +1,20 @@
 const router = require('express').Router();
+const db = require('../database');
+const bcrypt = require("bcryptjs"); // CON ESTA LIBRERIA COMPARO LA CONTRASEÑA DEL USUARIO CON EL HASH ALMACENADO EN LA BASE DE DATOS   
 
-router.post('/login', (req,res) => {
-
+router.post('/login', async (req,res) => {
+    try{
+        const cursor = await db.collection('registros').find({nombre_usuario: req.body.nombre_usuario}).toArray()
+        bcrypt.compare(req.body.passwd, cursor[0].passwd, function(err, resultado) {
+            //console.log(resultado)
+            res.json({
+                error: null,
+                data: 'Log-In realizado correctamente'
+            })
+        });
+      }catch(err){
+        console.log(err)
+      }
 })
 
 module.exports = router;
-
-/*
-req.body.passwd: aqui va la contraseña que el usuario introduce en el login
-hash: aqui va la contraseña encriptada que esta guardada en la base de datos, asociada al nombre de Usuario
-bcrypt.compare(req.body.passwd, hash, function(err, res) {
-                    console.log(res)
-                });
-
-*/
