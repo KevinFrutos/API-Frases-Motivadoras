@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken')// USO ESTA LIBRERIA PARA VALIDAR LA API-KEY
 
 // MODDLEWARE ES UNA RUTA INTERMEDIA PARA PROTEGER LAS RUTAS QUE SON SOLO ACCESIBLES CON UN TOKEN
 const validarToken = (req, res, next) => {
