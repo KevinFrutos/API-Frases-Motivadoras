@@ -45,7 +45,7 @@ router.post('/registrarse',
                 })
             } else {
                 // EN CASO QUE EL USUARIO SEA CORRECTO Y SE GUARDE EN LA BASE DE DATOS SE ENVIA EL TOKEN
-                res.status(200).header('auth_token', token).cookie('Primera cookie', 'Es la primera cookie que hago', { httpOnly: true, expires: new Date(1000 * 60 * 10) }).json({
+                res.status(200).header('auth_token', token).json({
                     error: null,
                     description: "Este es tu token recuerda no compartirlo con nadie",
                     data: token
