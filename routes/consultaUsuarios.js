@@ -11,7 +11,7 @@ router.get('/usuario', async (req, res) => {
       // const cursor = await db.collection('registros').find({nombre_usuario: req.query.nombre_usuario}).toArray()
       
       // EN CASO DE QUE EL USUARIO EXISTA, SE ENVIAN LOS DATOS
-      res.send(cursor)
+      res.status(200).send(cursor)
     }else{
       res.status(400).json({ error: 'token no es válido' })
     }

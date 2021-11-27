@@ -13,7 +13,7 @@ router.post('/login', async (req, res) => {
         bcrypt.compare(req.body.passwd, cursor[0].passwd, function (err, resultado) {
             //console.log(resultado) // TRUE SI EL PASSWORD ES CORRECTO
             if (!resultado) {
-                res.json({
+                res.status(400).json({
                     error: err,
                     data: 'Algo fue mal'
                 })
@@ -24,7 +24,7 @@ router.post('/login', async (req, res) => {
                     passwd: req.body.passwd
                 }, process.env.TOKEN_SECRET)
 
-                res.header('auth-token', token).json({
+                res.status(200).header('auth-token', token).json({
                     error: null,
                     description: "Este es tu token recuerda no compartirlo con nadie",
                     data: token

@@ -36,13 +36,13 @@ router.post('/registrarse',
                 registrarse.save(err => {
                     if (err) {
                         console.log(err);
-                        res.json({
+                        res.status(400).json({
                             error: err,
                             data: 'Algo fue mal'
                         })
                     } else {
                         // EN CASO QUE EL USUARIO SEA CORRECTO Y SE GUARDE EN LA BASE DE DATOS SE ENVIA EL TOKEN
-                        res.header('auth-token', token).json({
+                        res.status(200).header('auth-token', token).json({
                             error: null,
                             description: "Este es tu token recuerda no compartirlo con nadie",
                             data: token

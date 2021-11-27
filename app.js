@@ -20,7 +20,7 @@ app.use(bodyparser.json());
 app.set('json spaces', 2);
 
 app.get('/', (req, res) => {
-  res.json({
+  res.status(200).json({
     "error": null, 
     "descripcion": "Conectado a API-General"
   })
