@@ -17,14 +17,14 @@ router.post('/registrarse',
             return res.status(400).json({ errors: errors.array() });
         }
         // ENCRIPTO LA CONTRASEÑA
-        const password = bcrypt.hashSync(req.body.passwd, 10)
+        const password = bcrypt.hashSync(req.body.passwd, process.env.SALTOS_TOKEN)
         // SE CREA EL TOKEN UTILIZANDO EL NOMBRE DE USUARIO Y LA CONTRASEÑA
         const token = jwt.sign({
             nombre_usuario: req.body.nombre_usuario,
             passwd: req.body.passwd
         }, process.env.TOKEN_SECRET)
         // ENCRIPTO LA API_KEY
-        const api_key = bcrypt.hashSync(token, 10)
+        const api_key = bcrypt.hashSync(token, process.env.SALTOS_TOKEN)
         // EN CASO DE QUE LOS DATOS ESTEN CORRECTOS SE UTILIZA EL SCHEMA QUE HE CREADO PARA LA INSERCION DE DATOS EN LA BASE DE DATOS
         // Y SE RELLENAN LOS CAMPOS CON LOS DATOS OBTENIDOS DEL FORMULARIO.
         const registrarse = new Registrarse({
@@ -45,7 +45,7 @@ router.post('/registrarse',
                 })
             } else {
                 // EN CASO QUE EL USUARIO SEA CORRECTO Y SE GUARDE EN LA BASE DE DATOS SE ENVIA EL TOKEN
-                res.status(200).header('auth_token', token).json({
+                res.status(200).header('auth_token', token).cookie('Primera cookie', 'Es la primera cookie que hago').json({
                     error: null,
                     description: "Este es tu token recuerda no compartirlo con nadie",
                     data: token

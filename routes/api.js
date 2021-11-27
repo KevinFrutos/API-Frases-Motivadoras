@@ -25,7 +25,7 @@ router.post('/api', async (req, res) => {
                     passwd: req.body.passwd
                 }, process.env.TOKEN_SECRET)
                 // ENCRIPTO LA API_KEY
-                const api_key = bcrypt.hashSync(token, 10)
+                const api_key = bcrypt.hashSync(token, process.env.SALTOS_TOKEN)
                 await Registrarse.updateOne({ nombre_usuario: req.body.nombre_usuario }, { api_key: api_key })
                 res.status(200).header('auth-token', token).json({
                     error: null,
