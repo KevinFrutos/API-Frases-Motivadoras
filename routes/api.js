@@ -19,23 +19,19 @@ router.post('/api', async (req, res) => {
                     data: 'Algo fue mal'
                 })
             } else {
-                try {
-                    // SE CREA EL TOKEN
-                    const token = jwt.sign({
-                        nombre_usuario: req.body.nombre_usuario,
-                        passwd: req.body.passwd
-                    }, process.env.TOKEN_SECRET)
-                    // ENCRIPTO LA API_KEY
-                    const api_key = bcrypt.hashSync(token, process.env.SALTOS_TOKEN)
-                    await Registrarse.updateOne({ nombre_usuario: req.body.nombre_usuario }, { api_key: api_key })
-                    res.status(200).header('auth-token', token).json({
-                        error: null,
-                        description: "Este es tu token recuerda no compartirlo con nadie",
-                        data: token
-                    })
-                } catch (error) {
-                    console.log(error)
-                }
+                // SE CREA EL TOKEN
+                const token = jwt.sign({
+                    nombre_usuario: req.body.nombre_usuario,
+                    passwd: req.body.passwd
+                }, process.env.TOKEN_SECRET)
+                // ENCRIPTO LA API_KEY
+                const api_key = bcrypt.hashSync(token, 10)
+                await Registrarse.updateOne({ nombre_usuario: req.body.nombre_usuario }, { api_key: api_key })
+                res.status(200).header('auth-token', token).json({
+                    error: null,
+                    description: "Este es tu token recuerda no compartirlo con nadie",
+                    data: token
+                })
             }
         });
     } catch (err) {
