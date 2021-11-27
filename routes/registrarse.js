@@ -16,40 +16,41 @@ router.post('/registrarse',
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        bcrypt.genSalt(10, function (err, salt) {
-            bcrypt.hash(req.body.passwd, salt, function (err, hash) {
-                // EN CASO DE QUE LOS DATOS ESTEN CORRECTOS SE UTILIZA EL SCHEMA QUE HE CREADO PARA LA INSERCION DE DATOS EN LA BASE DE DATOS
-                // Y SE RELLENAN LOS CAMPOS CON LOS DATOS OBTENIDOS DEL FORMULARIO.
-                const registrarse = new Registrarse({
-                    nombre_usuario: req.body.nombre_usuario,
-                    nombre: req.body.nombre,
-                    apellido: req.body.apellido,
-                    email: req.body.email,
-                    passwd: hash
+        // ENCRIPTO LA CONTRASEÑA
+        const password = bcrypt.hashSync(req.body.passwd, 10)
+        // SE CREA EL TOKEN UTILIZANDO EL NOMBRE DE USUARIO Y LA CONTRASEÑA
+        const token = jwt.sign({
+            nombre_usuario: req.body.nombre_usuario,
+            passwd: req.body.passwd
+        }, process.env.TOKEN_SECRET)
+        // ENCRIPTO LA API_KEY
+        const api_key = bcrypt.hashSync(token, 10)
+        // EN CASO DE QUE LOS DATOS ESTEN CORRECTOS SE UTILIZA EL SCHEMA QUE HE CREADO PARA LA INSERCION DE DATOS EN LA BASE DE DATOS
+        // Y SE RELLENAN LOS CAMPOS CON LOS DATOS OBTENIDOS DEL FORMULARIO.
+        const registrarse = new Registrarse({
+            nombre_usuario: req.body.nombre_usuario,
+            nombre: req.body.nombre,
+            apellido: req.body.apellido,
+            email: req.body.email,
+            passwd: password,
+            api_key: api_key
+        })
+        // SE ENVIA EL OBJETO JSON A LA BASE DE DATOS Y SE CREA LA ENTRADA CON LOS DATOS ENVIADOS.
+        registrarse.save(err => {
+            if (err) {
+                console.log(err);
+                res.status(400).json({
+                    error: err,
+                    data: 'Algo fue mal'
                 })
-                // SE CREA EL TOKEN UTILIZANDO EL NOMBRE DE USUARIO Y LA CONTRASEÑA
-                const token = jwt.sign({
-                    nombre_usuario: req.body.nombre_usuario,
-                    passwd: req.body.passwd
-                }, process.env.TOKEN_SECRET)
-                // SE ENVIA EL OBJETO JSON A LA BASE DE DATOS Y SE CREA LA ENTRADA CON LOS DATOS ENVIADOS.
-                registrarse.save(err => {
-                    if (err) {
-                        console.log(err);
-                        res.status(400).json({
-                            error: err,
-                            data: 'Algo fue mal'
-                        })
-                    } else {
-                        // EN CASO QUE EL USUARIO SEA CORRECTO Y SE GUARDE EN LA BASE DE DATOS SE ENVIA EL TOKEN
-                        res.status(200).header('auth-token', token).json({
-                            error: null,
-                            description: "Este es tu token recuerda no compartirlo con nadie",
-                            data: token
-                        })
-                    }
-                });
-            });
+            } else {
+                // EN CASO QUE EL USUARIO SEA CORRECTO Y SE GUARDE EN LA BASE DE DATOS SE ENVIA EL TOKEN
+                res.status(200).header('auth_token', token).json({
+                    error: null,
+                    description: "Este es tu token recuerda no compartirlo con nadie",
+                    data: token
+                })
+            }
         });
     })
 

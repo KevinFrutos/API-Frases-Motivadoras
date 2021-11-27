@@ -6,7 +6,8 @@ const schema = new Schema({
     nombre: { type: String, required: true },
     apellido: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    passwd: { type: String, required: true }
+    passwd: { type: String, required: true },
+    api_key: { type: String }
 });
 
 module.exports = db.model('Registro', schema)
