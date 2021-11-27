@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')// USO ESTA LIBRERIA PARA VALIDAR LA API-KEY
-const db = require('../database');
+const db_usuarios = require('../database/dbUsuarios');
 const bcrypt = require("bcryptjs"); // CON ESTA LIBRERIA COMPARO EL TOKEN CON EL HASH ALMACENADO EN LA BASE DE DATOS
 
 // MODDLEWARE ES UNA RUTA INTERMEDIA PARA PROTEGER LAS RUTAS QUE SON SOLO ACCESIBLES CON UN TOKEN
@@ -9,7 +9,7 @@ const validarToken = async (req, res, next) => {
         return res.status(401).json({ error: 'Acceso denegado' })
     }
     try {
-        const cursor = await db.collection('registros').findOne({ nombre_usuario: req.query.nombre_usuario })
+        const cursor = await db_usuarios.collection('registros').findOne({ nombre_usuario: req.query.nombre_usuario })
         bcrypt.compare(token, cursor.api_key, async function (err, resultado) {
             if (!resultado) {
                 res.status(400).json({

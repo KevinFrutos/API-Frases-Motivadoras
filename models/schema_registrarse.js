@@ -1,5 +1,5 @@
 const { Schema } = require("mongoose");
-const db = require('../database');
+const db_usuarios = require('../database/dbUsuarios');
 
 const schema = new Schema({
     nombre_usuario: { type: String, required: true, unique: true },
@@ -14,4 +14,4 @@ const schema = new Schema({
     }]
 });
 
-module.exports = db.model('Registro', schema)
+module.exports = db_usuarios.model('Registro', schema)
