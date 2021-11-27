@@ -30,6 +30,8 @@ app.use('/perfil', registrarse)
 
 app.use('/perfil', login)
 
+// ESTO ES UNA RUTA MODDLEWARE, ES UNA RUTA INTERMEDIA PARA PROTEGER LAS RUTAS 
+// QUE SON SOLO ACCESIBLES EN ESTE CASO CON UN TOKEN
 app.use('/consultas', validarToken, consultaUsuarios)
 
 
