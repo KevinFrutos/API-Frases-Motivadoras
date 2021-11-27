@@ -7,7 +7,6 @@ const api_key_generator = require('./routes/api')
 const consultaUsuarios = require('./routes/consultaUsuarios')
 const post = require('./routes/post')
 const validarToken = require('./routes/validarToken')
-const cookieParser = require('cookie-parser')
 
 const app = express();
 
@@ -17,9 +16,6 @@ app.use(cors())
 // CAPTURAR DATOS DEL BODY
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
-
-// PARA CREAR COOKIES
-app.use(cookieParser());
 
 // FORMATEAR LOS JSON
 app.set('json spaces', 2);
