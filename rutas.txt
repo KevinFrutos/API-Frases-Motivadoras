@@ -19,3 +19,21 @@ ES NECESARIO AÑADIR ESTE HEADER A LA CONSULTA CON TU API KEY PARA PODER COMPROB
 headers: {
     "auth-token": "API_KEY"
 }
+
+# INSERTAR NUEVA FRASE
+POST /frases/frase
+headers: {
+    'Content-Type': 'application/json',
+    "auth_token":  "API_KEY",
+    "nombre_usuario": "NOMBRE_USUARIO"
+},
+body: JSON.stringify({
+                        frase: frase,
+                        autor: autor
+                    })
+
+# CONSULTAR FRASE
+GET /frases/frase?nombre_usuario=TuNombreDeUsuario
+headers: {
+    "auth_token":  "API_KEY"
+}

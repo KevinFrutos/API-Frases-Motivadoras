@@ -7,6 +7,7 @@ const api_key_generator = require('./routes/api')
 const consultaUsuarios = require('./routes/consultaUsuarios')
 const post = require('./routes/post')
 const agregarFrase = require('./routes/agregarFrase')
+const consultarFrase = require('./routes/consultarFrase')
 const validarToken = require('./routes/validarToken')
 
 const app = express();
@@ -28,17 +29,22 @@ app.get('/', (req, res) => {
   })
 })
 
+// RUTA DE REGISTRO DE USUARIO
 app.use('/perfil', registrarse)
 
+// RUTA PARA RE-GENERAR UNA API_KEY
 app.use('/perfil', api_key_generator)
 
 // ESTO ES UNA RUTA MODDLEWARE, ES UNA RUTA INTERMEDIA PARA PROTEGER LAS RUTAS 
 // QUE SON SOLO ACCESIBLES EN ESTE CASO CON UN TOKEN
 app.use('/consultas', validarToken, consultaUsuarios)
 
+// RUTA INACTIVA QUE SIRVE PARA AGREGAR POSTS
 app.use('/entradas', post)
 
+// RUTAS PARA AGREGAR Y CONSULTAR FRASES
 app.use('/frases', validarToken, agregarFrase)
+app.use('/frases', validarToken, consultarFrase)
 
 
 // SI EL USUARIO INTENTA ENTRAR A ALGUNA RUTA QUE NO ESTE CONFIGURADA LE SALTARA LA PAGINA DE ERROR 404
