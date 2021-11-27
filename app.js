@@ -6,6 +6,7 @@ const registrarse = require('./routes/registrarse')
 const api_key_generator = require('./routes/api')
 const consultaUsuarios = require('./routes/consultaUsuarios')
 const post = require('./routes/post')
+const agregarFrase = require('./routes/agregarFrase')
 const validarToken = require('./routes/validarToken')
 
 const app = express();
@@ -36,6 +37,8 @@ app.use('/perfil', api_key_generator)
 app.use('/consultas', validarToken, consultaUsuarios)
 
 app.use('/entradas', post)
+
+app.use('/frases', validarToken, agregarFrase)
 
 
 // SI EL USUARIO INTENTA ENTRAR A ALGUNA RUTA QUE NO ESTE CONFIGURADA LE SALTARA LA PAGINA DE ERROR 404
