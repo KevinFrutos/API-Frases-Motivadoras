@@ -3,8 +3,9 @@ const bodyparser = require('body-parser');
 require('dotenv').config()
 const cors = require('cors')
 const registrarse = require('./routes/registrarse')
-const login = require('./routes/login')
+const api_key_generator = require('./routes/api')
 const consultaUsuarios = require('./routes/consultaUsuarios')
+const post = require('./routes/post')
 const validarToken = require('./routes/validarToken')
 
 const app = express();
@@ -28,11 +29,13 @@ app.get('/', (req, res) => {
 
 app.use('/perfil', registrarse)
 
-app.use('/perfil', login)
+app.use('/perfil', api_key_generator)
 
 // ESTO ES UNA RUTA MODDLEWARE, ES UNA RUTA INTERMEDIA PARA PROTEGER LAS RUTAS 
 // QUE SON SOLO ACCESIBLES EN ESTE CASO CON UN TOKEN
 app.use('/consultas', validarToken, consultaUsuarios)
+
+app.use('/entradas', post)
 
 
 // SI EL USUARIO INTENTA ENTRAR A ALGUNA RUTA QUE NO ESTE CONFIGURADA LE SALTARA LA PAGINA DE ERROR 404

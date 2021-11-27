@@ -5,9 +5,9 @@ GET /
 POST /perfil/registrarse
 SCHEMA DE LOS CAMPOS A USAR: \models\schema_registrarse.js
 
-# LOGIN
-POST /perfil/login
-JSON QUE NECESITA LA RUTA PARA VALIDAR EL LOGIN
+# GENERA NUEVA API_KEY
+POST /perfil/api
+JSON QUE NECESITA LA RUTA PARA GENERAR UNA NUEVA API_KEY
 {
     nombre_usuario: "usuario",
     passwd: "contraseña"
