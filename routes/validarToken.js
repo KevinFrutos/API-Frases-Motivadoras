@@ -5,15 +5,12 @@ const bcrypt = require("bcryptjs"); // CON ESTA LIBRERIA COMPARO EL TOKEN CON EL
 // MODDLEWARE ES UNA RUTA INTERMEDIA PARA PROTEGER LAS RUTAS QUE SON SOLO ACCESIBLES CON UN TOKEN
 const validarToken = async (req, res, next) => {
     const token = req.header('auth_token')
-    let usuario = req.query.nombre_usuario
-    if(!req.query.nombre_usuario){
-        usuario = req.header('nombre_usuario')
-    }
     if (!token) {
         return res.status(401).json({ error: 'Acceso denegado' })
     }
     try {
-        const cursor = await db_usuarios.collection('registros').findOne({ nombre_usuario: usuario })
+        const token_valido = jwt.verify(token, process.env.TOKEN_SECRET) // COMPRUEBA SI EL TOKEN ES CORRECTO
+        const cursor = await db_usuarios.collection('registros').findOne({ nombre_usuario: token_valido.nombre_usuario })
         bcrypt.compare(token, cursor.api_key, async function (err, resultado) {
             if (!resultado) {
                 res.status(400).json({
@@ -21,8 +18,7 @@ const validarToken = async (req, res, next) => {
                     data: 'Algo fue mal'
                 })
             } else {
-                const token_valido = jwt.verify(token, process.env.TOKEN_SECRET) // COMPRUEBA SI EL TOKEN ES CORRECTO
-                req.token = token_valido
+                req.token = token_valido // PASO LA INFO DEL TOKEN AL REQUEST DE LA SIGUIENTE RUTA
                 next() // EN CASO DE QUE EL TOKEN SEA CORRECTO, CONTINUA A LA RUTA PROTEGIDA
             }
         })
