@@ -5,7 +5,6 @@ const cors = require('cors')
 const registrarse = require('./routes/registrarse')
 const api_key_generator = require('./routes/api')
 const consultaUsuarios = require('./routes/consultaUsuarios')
-const post = require('./routes/post') // RUTA INACTIVA
 const agregarFrase = require('./routes/agregarFrase')
 const consultarFrase = require('./routes/consultarFrase')
 const validarToken = require('./routes/validarToken')
@@ -42,9 +41,6 @@ app.use('/consultas', validarToken, consultaUsuarios)
 // RUTAS PARA AGREGAR Y CONSULTAR FRASES
 app.use('/frases', validarToken, agregarFrase)
 app.use('/frases', validarToken, consultarFrase)
-
-// RUTA INACTIVA QUE SIRVE PARA AGREGAR POSTS
-app.use('/entradas', post)
 
 // SI EL USUARIO INTENTA ENTRAR A ALGUNA RUTA QUE NO ESTE CONFIGURADA LE SALTARA LA PAGINA DE ERROR 404
 app.use((req, res, next) => {

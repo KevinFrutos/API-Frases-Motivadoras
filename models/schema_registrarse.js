@@ -7,11 +7,7 @@ const schema = new Schema({
     apellido: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     passwd: { type: String, required: true },
-    api_key: { type: String },
-    post: [{
-        _id: { type: Date },
-        description: { type: String, required: true }
-    }]
+    api_key: { type: String }
 });
 
 module.exports = db_usuarios.model('Registro', schema)
