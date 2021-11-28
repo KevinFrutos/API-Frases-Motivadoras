@@ -23,8 +23,7 @@ headers: {
 POST /frases/frase
 headers: {
     'Content-Type': 'application/json',
-    "auth_token":  "API_KEY",
-    "nombre_usuario": "NOMBRE_USUARIO"
+    "auth_token":  "API_KEY"
 },
 body: JSON.stringify({
                         frase: frase,
