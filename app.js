@@ -24,7 +24,7 @@ app.set('json spaces', 2);
 
 app.get('/', (req, res) => {
   res.status(200).json({
-    "error": null, 
+    "error": null,
     "descripcion": "Conectado a API-General"
   })
 })
@@ -48,7 +48,10 @@ app.use('/entradas', post)
 
 // SI EL USUARIO INTENTA ENTRAR A ALGUNA RUTA QUE NO ESTE CONFIGURADA LE SALTARA LA PAGINA DE ERROR 404
 app.use((req, res, next) => {
-  res.status(404).json({"error": "404", "descripcion": "Pagina no encontrada"})
+  res.status(404).json({
+    error: "404",
+    descripcion: "Pagina no encontrada"
+  })
 })
 
 // ABRO LA CONEXION DE LA API Y LE DIGO EL PUERTO QUE DEBE USAR
