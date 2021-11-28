@@ -14,8 +14,7 @@ JSON QUE NECESITA LA RUTA PARA GENERAR UNA NUEVA API_KEY
 }
 
 # CONSULTAS
-GET /consultas/usuario?nombre_usuario=TuNombreDeUsuario
-ES NECESARIO AÑADIR ESTE HEADER A LA CONSULTA CON TU API KEY PARA PODER COMPROBAR QUE TIENES ACCESO A LA API
+GET /consultas/usuario
 headers: {
     "auth-token": "API_KEY"
 }
@@ -33,7 +32,7 @@ body: JSON.stringify({
                     })
 
 # CONSULTAR FRASE
-GET /frases/frase?nombre_usuario=TuNombreDeUsuario
+GET /frases/frase
 headers: {
     "auth_token":  "API_KEY"
 }

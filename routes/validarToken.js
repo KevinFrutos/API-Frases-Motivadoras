@@ -11,11 +11,11 @@ const validarToken = async (req, res, next) => {
     try {
         const token_valido = jwt.verify(token, process.env.TOKEN_SECRET) // COMPRUEBA SI EL TOKEN ES CORRECTO
         const cursor = await db_usuarios.collection('registros').findOne({ nombre_usuario: token_valido.nombre_usuario })
-        bcrypt.compare(token, cursor.api_key, async function (err, resultado) {
+        bcrypt.compare(token, cursor.api_key, function (err, resultado) {
             if (!resultado) {
                 res.status(400).json({
                     error: err,
-                    data: 'Algo fue mal'
+                    data: 'El token no es válido o esta desactualizado'
                 })
             } else {
                 req.token = token_valido // PASO LA INFO DEL TOKEN AL REQUEST DE LA SIGUIENTE RUTA
