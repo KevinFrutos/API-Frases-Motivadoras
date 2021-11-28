@@ -13,7 +13,7 @@ JSON QUE NECESITA LA RUTA PARA GENERAR UNA NUEVA API_KEY
     passwd: "contraseña"
 }
 
-# CONSULTAS
+# CONSULTA TUS DATOS DE USUARIO
 GET /consultas/usuario
 headers: {
     "auth-token": "API_KEY"
