@@ -1,7 +1,6 @@
 # API-Frases-Motivadoras
 
-_Esta es la primera API que he creado, esta comentada casi linea por linea para 
-usarla como documentacion en un futuro a la hora de hacer otra API_
+_Esta es la primera API que he creado, esta comentada ya que quiero poder usarla como documentacion en un futuro a la hora de hacer otra API._
 
 ## Comenzando 🚀
 
