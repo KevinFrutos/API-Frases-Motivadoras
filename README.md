@@ -12,6 +12,7 @@ _Para empezar a usr la API lo primero que necesitas hacer es registrarte usando 
 _A continuación mostrare las rutas disponibles, y una breve descripción de como usar la API_
 
 _# CONECTADO_
+__En esta ruta todo lo que haces es comprobar que tienes acceso a la API y que esta funcionando__
 
 ```
 GET /
