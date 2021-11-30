@@ -1,14 +1,14 @@
 {
-  "name": "aplicacionweb",
+  "name": "api-frases-motivadoras",
   "version": "1.0.0",
-  "description": "Primera app web",
+  "description": "Esta es mi primera API y a medida que voy aprendiendo la voy mejorando.",
   "main": "app.js",
   "scripts": {
     "dev": "nodemon app",
     "start": "node app"
   },
   "keywords": [],
-  "author": "",
+  "author": "Kevin Frutos",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
