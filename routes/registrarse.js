@@ -21,7 +21,7 @@ router.post('/registrarse',
         // SE CREA EL TOKEN UTILIZANDO EL NOMBRE DE USUARIO Y LA CONTRASEÑA
         const token = jwt.sign({
             nombre_usuario: req.body.nombre_usuario,
-            passwd: req.body.passwd
+            email: req.body.email
         }, process.env.TOKEN_SECRET)
         // ENCRIPTO LA API_KEY
         const api_key = bcrypt.hashSync(token, 10)

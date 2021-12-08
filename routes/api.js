@@ -22,7 +22,7 @@ router.post('/api', async (req, res) => {
                 // SE CREA EL TOKEN
                 const token = jwt.sign({
                     nombre_usuario: req.body.nombre_usuario,
-                    passwd: req.body.passwd
+                    email: cursor[0].email
                 }, process.env.TOKEN_SECRET)
                 // ENCRIPTO LA API_KEY
                 const api_key = bcrypt.hashSync(token, 10)
